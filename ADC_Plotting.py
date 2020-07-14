@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from matplotlib import style
 from datetime import datetime
-from scipy.signal import savgol_filter
+from statistics import mean
 
 adc_data = []
 time_data = []
 
-for i in range(50):
+for i in range(10):
     time_data.append(datetime.now())
     adc_data.append(2.5)
 
@@ -57,7 +57,7 @@ def animate(frame):
     adc_data.append(frame[0])
     time_data.append(frame[1])
 
-    line.set_data(savgol_filter(adc_data, 49, 3), time_data)
+    line.set_data(mean(adc_data[-9:-1]), time_data)
 
     ax.clear()
     ax.plot(time_data, adc_data)
